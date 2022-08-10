@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2C3333;
+  color: #E7F6F2;
+  padding: 16px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+nav > form > input {
+  border: none;
+  padding: 8px;
+  width: 320px;
+  background: whitesmoke;
+}
+
+.note-form {
+  display: flex;
+  justify-content: center;
+  width: 480px;
+  flex-direction: column;
+  padding: 16px;
+  margin: 16px 16px 64px 16px;
+}
+
+.note-form > input, textarea {
+  margin-top: 8px;
+  border: none;
+  padding: 16px;
+  background: whitesmoke;
+}
+
+.add-note-button {
+  border: none;
+  padding: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  background-color: #395B64;
+  color: white;
+}
+
+.note-item {
+  width: 32vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+  border: 2px solid whitesmoke;
+  margin: 16px;
+  word-wrap: break-word;
+}
+
+.wrapper {
+  padding: 32px;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notes-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.delete-note-button {
+  width: 64px;
+  cursor: pointer;
+  border: none;
+  background: #D61C4E;
+  color: white;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 11px;
+}
+
+.archive-note-button {
+  min-width: 120px;
+  cursor: pointer;
+  border: none;
+  background: #395B64;
+  color: white;
+  border-radius: 4px;
+  padding: 4px;
+  margin-right: 4px;
+  font-size: 11px;
+}
+
+.note-created-date {
+  color: darkslategray;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.note-body {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.title-count {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2B7A0B;
+}
+
+.red {
+  color: #D61C4E;
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  background-color: #2C3333;
+  color: #E7F6F2;
+  padding: 8px;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 600px) {
+  nav > h2{
+    font-size: 16px;
+  }
+
+  nav > form > input {
+    width: 240px;
+  }
+
+  .note-form {
+    width: 320px;
+  }
+
+  .notes-wrapper {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
+  .note-item {
+    width: 64vw;
+  }
+}
