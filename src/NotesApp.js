@@ -18,10 +18,10 @@ export default function NotesApp() {
   const [titleCount, setTitleCount] = useState(0);
   
   const isStorageSupported = () => {
-    if (typeof Storage === "undefined") {
-      return false;
-    } else {
+    if (typeof Storage !== "undefined") {
       return true;
+    } else {
+      return false;
     }
   }
 
