@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputNote } from "./components/InputNote";
 import { NoteItem } from "./components/NoteItem";
 import { Navbar } from "./components/Navbar";
-import { getInitialData, showFormattedDate } from "./utils/index";
+import { showFormattedDate } from "./utils/index";
 import Wrapper from "./components/Wrapper";
 import NotesWrapper from "./components/NotesWrapper";
 import Footer from "./components/Footer";
@@ -10,11 +10,20 @@ import EmptyNotes from "./components/EmptyNotes";
 import Swal from 'sweetalert2'
 
 export default function NotesApp() {
-  const [notes, setNotes] = useState(getInitialData());
+  const STORAGE_KEY = "NOTES";
+  const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [keyword, setKeyword] = useState("");
   const [titleCount, setTitleCount] = useState(0);
+  
+  const isStorageSupported = () => {
+    if (typeof Storage === "undefined") {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const Toast = Swal.mixin({
     toast: true,
@@ -79,8 +88,8 @@ export default function NotesApp() {
       confirmButtonColor: '#D61C4E',
     }).then((result) => {
       if(result.isConfirmed) {
-        setNotes((notes) => notes.filter((note) => note.id !== id));
-      
+        const newNotes = (notes) => notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
         Toast.fire({
           icon: 'success',
           title: 'Note successfully deleted!'
@@ -105,7 +114,7 @@ export default function NotesApp() {
     Toast.fire({
       title: "Success!",
       icon: "success"
-    })
+    });
   };
 
   const checkNotes = () => {
@@ -115,6 +124,23 @@ export default function NotesApp() {
       return true;
     }
   };
+  
+  useEffect(() => {
+    if(isStorageSupported() && window.localStorage.getItem(STORAGE_KEY) !== null) {
+      const data = window.localStorage.getItem(STORAGE_KEY);
+      setNotes(JSON.parse(data));
+    } else {
+      Swal.fire({
+        title: "Web storage is not supported in your browser.",
+        icon: "error"
+      })
+      setNotes([]);
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  }, [notes]);
 
   return (
     <>
